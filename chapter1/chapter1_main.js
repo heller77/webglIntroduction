@@ -1,3 +1,4 @@
+//htmlが読み終わったらchapter1_main関数を呼び出す
 window.addEventListener("load", chapter1_main);
 
 function chapter1_main() {
