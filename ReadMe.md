@@ -1,4 +1,22 @@
-# webgk勉強会リポジトリ
+# webgl勉強会リポジトリ
+
+chapter1からchapter4まで完成済み。
+
+## chapter1
+
+webglの初期化とcanvasの色の塗りつぶし
+
+## chapter2
+
+三角形の描画
+
+## chapter3
+
+立方体描画
+
+## chapter4
+
+立方体の回転
 
 このリポジトリでは,glMatrix.jsを使用しています。\
 Copyright (c) 2015-2021, Brandon Jones, Colin MacKenzie IV.
