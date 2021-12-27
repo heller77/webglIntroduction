@@ -21,7 +21,9 @@ function chapter2_main() {
             0.0, 1.0, 0.0,//真ん中上の頂点
             1.0, -1.0, 0.0//右下の頂点
         ];
+    //このバッファは「gl.ARRAY_BUFFERですよ」と教えている
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    //バッファにデータをいれる
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexPosition), gl.STATIC_DRAW);
 
 
@@ -34,8 +36,11 @@ function chapter2_main() {
       gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
     }
   `;
+    //シェーダーオブジェクト（シェーダを格納するオブジェクト）を生成
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    //シェーダーオブジェクトにシェーダのコードを設定
     gl.shaderSource(vertexShader, vertexShaderSource);
+    //シェーダーをコンパイル
     gl.compileShader(vertexShader);
 
     const fragmentShaderSource = `

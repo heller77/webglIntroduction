@@ -204,6 +204,4 @@ function draw(gl, shaderProgramInfo, buffers, deltatime) {
     const offset = 0;
     const vertexCount = 36;
     gl.drawElements(gl.TRIANGLES, vertexCount, gl.UNSIGNED_SHORT, offset);
-
-
 }
