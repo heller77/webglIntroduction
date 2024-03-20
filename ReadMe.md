@@ -18,6 +18,8 @@ webglの初期化とcanvasの色の塗りつぶし
 
 立方体の回転
 
+# 使用ライブラリ
+
 このリポジトリでは,glMatrix.jsを使用しています。\
 Copyright (c) 2015-2021, Brandon Jones, Colin MacKenzie IV.
 
