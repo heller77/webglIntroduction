@@ -2,6 +2,10 @@
 
 chapter1からchapter4まで完成済み。
 
+以下で公開
+https://heller77.github.io/webglIntroduction/
+
+
 ## chapter1
 
 webglの初期化とcanvasの色の塗りつぶし
