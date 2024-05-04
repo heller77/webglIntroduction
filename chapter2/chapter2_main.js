@@ -143,7 +143,7 @@ function draw(gl, shaderProgramInfo, positionbuffer) {
     modelviewMatix
   );
 
-  //頂点バッファの見方（offsetはなくて、vector3ですよ）と教えて、描画命令
+  //頂点バッファの見方（頂点バッファの最初に空きはないのでoffsetは0で、頂点の数は3なのでvertexCountは3）と教えて、描画命令
   const offset = 0;
   const vertexCount = 3;
   gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
