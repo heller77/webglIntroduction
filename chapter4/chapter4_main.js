@@ -181,7 +181,8 @@ let rotateValue = 0;
 
 //positionbufferとindexbufferをbuffersに
 function draw(gl, shaderProgramInfo, buffers, deltatime) {
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  //毎フレーム
+  gl.clearColor(1.0, 0.0, 0.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   //モデル変換用の行列(viewはカメラの位置の反映用の行列。今回は原点にある想定なので特に書かない)

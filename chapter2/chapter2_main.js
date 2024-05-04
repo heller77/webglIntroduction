@@ -12,8 +12,7 @@ function chapter2_main() {
   //画面を塗りつぶす
   gl.clear(gl.COLOR_BUFFER_BIT);
 
-  //頂点位置のバッファを確保
-  let positionBuffer = gl.createBuffer();
+  //三角形の頂点の座標を定義(cpu側で)
   const vertexPosition = [
     -1.0,
     -1.0,
@@ -25,9 +24,14 @@ function chapter2_main() {
     -1.0,
     0.0, //右下の頂点
   ];
-  //このバッファは「gl.ARRAY_BUFFERですよ」と教えている
+
+  //空のバッファをGPU上に確保
+  let positionBuffer = gl.createBuffer();
+
+  //ターゲットをgl.ARRAY_BUFFERと指定。
+  //「頂点の属性をについて操作するぞ！」と教えてる
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  //バッファにデータをいれる
+  //GPU上のバッファにCPU側で定義したデータ(vertexPosition)を設定
   gl.bufferData(
     gl.ARRAY_BUFFER,
     new Float32Array(vertexPosition),
@@ -82,18 +86,23 @@ function chapter2_main() {
   draw(gl, shaderProgramInfo, positionBuffer);
 }
 
+/**
+ * 描画する
+ * @param {WebGLコンテキスト} gl
+ * @param {シェーダ} shaderProgramInfo
+ * @param {頂点バッファの参照} positionbuffer
+ */
 function draw(gl, shaderProgramInfo, positionbuffer) {
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
   //モデル変換用の行列(viewはカメラの位置の反映用の行列。今回は原点にある想定なので特に書かない)
   const modelviewMatix = mat4.create();
   mat4.translate(modelviewMatix, modelviewMatix, [0, 0, -3.0]);
 
+  //カメラのパラメータを定義
   const fieldOfView = (45 * Math.PI) / 180;
   const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
   const zNear = 0.1;
   const zFar = 100.0;
+  //プロジェクション行列
   const projectionMatrix = mat4.create();
   mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
@@ -118,19 +127,23 @@ function draw(gl, shaderProgramInfo, positionbuffer) {
       shaderProgramInfo.attributeLocations.vertexPosition
     );
   }
+  //このプログラムを使用する
   gl.useProgram(shaderProgramInfo.program);
 
+  //プロジェクション行列を設定
   gl.uniformMatrix4fv(
     shaderProgramInfo.uniformLocations.ProjectionMatrix,
     false,
     projectionMatrix
   );
+  //モデル行列とビュー行列を掛けたものを設定
   gl.uniformMatrix4fv(
     shaderProgramInfo.uniformLocations.ModelViewMatrix,
     false,
     modelviewMatix
   );
 
+  //頂点バッファの見方（offsetはなくて、vector3ですよ）と教えて、描画命令
   const offset = 0;
   const vertexCount = 3;
   gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);

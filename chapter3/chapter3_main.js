@@ -142,9 +142,6 @@ function initbuffer(gl) {
 }
 
 function draw(gl, shaderProgramInfo, positionbuffer, indexbuffer) {
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
   //モデル変換用の行列(viewはカメラの位置の反映用の行列。今回は原点にある想定なので特に書かない)
   const modelviewMatix = mat4.create();
   mat4.translate(modelviewMatix, modelviewMatix, [0, 0, -4.0]);
